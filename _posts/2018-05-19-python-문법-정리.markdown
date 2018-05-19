@@ -128,7 +128,7 @@ for fruit, color in zip(fruits, colors):
 #### Set(집합)
 순서무관/ 중복불가.---------------------------->중복없에는데 활용가능  
 * 집합연산자	설명  
-  * |	합집합(Union)  
+  * ||	합집합(Union)  
   - &	교집합(Intersection)  
   - 차집합(Difference)  
   * ^	대칭차집합(Exclusive)(합집합 -교집합)
