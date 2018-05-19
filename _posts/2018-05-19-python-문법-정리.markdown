@@ -51,13 +51,13 @@ in  존재여부 확인 ex) 'red'in fruits
 s.count(x)  s에서 x값을 갖는 원소의 갯수  
 zip(s1,s2,s3)--->sequence자료의 원소로 구성된 tuple들의 list 생성  
 
-<pre>
+'''
 여러 시퀀스 동시순회 (zip)
 fruits = ['apple', 'banana', 'melon']
 colors = ['red', 'yellow', 'green', 'purple']
 for fruit, color in zip(fruits, colors):
   print('fruit:', fruit, ' color:', color)
-</pre>
+'''
 
 ( 생성 인덱싱 동시가능 [1,2,3][1] =>>>2, 'string'[2]=>>'r' , (1,2,3)[0]=>>>1)
 
@@ -193,18 +193,24 @@ f'{apple}는 맛있어 맛있으면 {banana} {banana}}'
 * list cmprehension 의 중첩 -->알아보기 힘들어서 포문주로 씀
 
 <pre>
-for color in colors:
+for color in colors:    
   for fruit in fruits:
 
-[(color, fruit) for color in colors for fruit in fruits]
+[(color, fruit) for color in colors for fruit in fruits]    
 </pre>
+
+
+
+
+
+
 
 #### break확인 (else)
 for문으로 데이터를 순회하던 중, break문이 호출되지 않고 반복문이 종료되면 else문이 실행된다.
 
-<pre>
+'''
 for 항목 in iterable객체:
   pass
 else:
   break가 한 번도 호출되지 않았을 경우의 코드
-</pre>         
+'''         
