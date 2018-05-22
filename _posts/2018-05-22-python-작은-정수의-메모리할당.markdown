@@ -1,0 +1,30 @@
+---
+layout: "post"
+title: "python 작은 정수의 메모리할당"
+date: "2018-05-22 16:28"
+---
+
+
+```bash
+var1=2
+var2=2
+```
+
+```bash
+var1==var2         
+```
+
+&nbsp; &nbsp; &nbsp;결과------->True
+
+```bash
+id(var1)==id(var2)  #값비교
+```
+&nbsp; &nbsp; &nbsp; 결과------->True
+
+```bash
+var1 is var2  #같은 메모리 주소 갖는지 비교.  
+```
+&nbsp; &nbsp; &nbsp;   결과------->True
+
+
+**파이썬에서는 작은 정수같은 경우에는 메모리를 할당따로하는게 손실. 미리 메모리에 내장이 되어있다.그래서 같은 주소가 나온것.**
