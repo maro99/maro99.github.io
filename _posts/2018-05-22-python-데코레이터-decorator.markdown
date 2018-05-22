@@ -45,8 +45,52 @@ def half(x):
 
 다음과 같은 세부사항으로 함수를 만들었다.
 
-*이 함수는 original_function을 매개변수로 받아서  
-내부의 decorated_function을 리턴해준다.  
-decorated_function은 모든 가변인자를 전달받을 수 있으며  
-모든 가변인자 목록을 출력후 original_function에 가변인자들을 모두 전달해 호출한 결과를 리턴한다.  
+*1.이 함수는 original_function을 매개변수로 받아서  
+2.내부의 decorated_function을 리턴해준다.  
+3.decorated_function은 모든 가변인자를 전달받을 수 있으며  
+4.모든 가변인자 목록을 출력후 original_function에 가변인자들을 모두 전달해 호출한 결과를 리턴한다.  
 print_args --> 함수를 받아 그 함수를 포함한 다른 함수를 리턴해주는 decorator 함수*
+
+
+&nbsp;&nbsp;선언
+```bash
+def print_args(original_function):                          #데코레이터
+     # decorated_funtion->original_function을 한번 감싼 함수   #데코레이터 함수.
+    def decorated_function(*args, **kwargs):
+        print(f'args: {args}')
+        print(f'kargs: {kwargs}')
+        return original_function(*args, **kwargs)
+
+    return decorated_function
+
+```
+
+&nbsp;&nbsp;사용
+```bash
+decorated_square = print_args(square)
+decorated_square(5)
+```
+&nbsp;&nbsp;결과  
+args :{ 5. }  
+kwargs: {}  
+out:25
+
+
+<br>
+
+간편하게 이렇게도 사용한다.
+square 함수가 자동으로 데코레이터 함스로 바뀜
+square에 데코레이트 한 적 없지만 그것과 같은 결과남.
+
+&nbsp;&nbsp;선언
+```bash
+@print_args      #이걸로 감쌌다고 보면됨.
+
+def square(x):
+    return x*3
+```
+
+&nbsp;&nbsp;사용.
+```bash
+ square(3)
+```
