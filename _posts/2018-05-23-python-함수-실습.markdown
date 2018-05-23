@@ -80,6 +80,68 @@ def get_num(*args):
     else
     return result
 ```
+<br>
+args 사용해서. 더 많은 수들에 대해서 에러 없애주면?  
+애러처리 해보자.  
+랭쓰 많이 쓰니까 따로 변수에 받아두자.
+
+```bash
+
+def get_num(*args):
+    args_length =len(args)
+
+    if not(  args_length  ==1 or   args_length ==2):
+        return = ValueError('숫자1개또는 2개 입력해주세요')
+    if(args_length ==2):
+        return = args[0]*args[1]
+
+    return return args[0]**2
+```
+
+<br>
+초기값을 줘서 해보자. None값 사용해서
+
+```bash
+def get_num2(x,y=None):
+
+    if y is None:
+        return x*x
+    else:
+        return x*y
+
+```
+<br>
+혹은 더 간단하게.
+
+```bash
+
+def get_num2(x,y=None):
+
+    if y
+        return x*y
+    return x*x
+```
+<br>
+더 간단하게 튜플 사용해 보려 했는데 안됬다.
+```bash
+def get_num2(x,y=None):
+
+    return (x*y,x*x)[y==None]
+```
+ ---->참이 아니면 뒤는 안보고 걍 넘어간다고 알고있었는데 앞뒤가 좌->우 순서이듯 하다,
+
+
+<br>
+
+한줄로는 이것이 최선이듯. 조건표현식 해석
+
+```bash
+
+def get_num2(x,y=None):
+
+    return x*y if y else x**2
+
+```
 
 
 <br>
@@ -89,6 +151,13 @@ def get_num(*args):
 def plus_minus(num1,num2):
     return (num1+num2),(num1-num2)
 ```
+차가 음수 안나오게 하고싶으면
+
+```bash
+def plus_minus(num1,num2):
+    return (num1+num2),num2-num1  if num1-num2<0 else num1-num2)
+```
+
 
 <br>
 
