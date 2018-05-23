@@ -1,0 +1,110 @@
+---
+layout: "post"
+title: "Python 함수 실습."
+date: "2018-05-23 10:42"
+---
+
+#### 실습
+1. 매개변수로 문자열을 받고, 해당 문자열이 red면 apple을, yellow면 banana를, green이면 melon을, 어떤 경우도 아닐 경우 I don't know를 리턴하는 함수를 정의하고, 사용하여 result변수에 결과를 할당하고 print해본다.
+
+2. 1번에서 작성한 함수에 docstring을 작성하여 함수에 대한 설명을 달아보고, help(함수명)으로 해당 설명을 출력해본다.
+
+3. 한 개 또는 두 개의 숫자 인자를 전달받아, 하나가 오면 제곱, 두개를 받으면 두 수의 곱을 반환해주는 함수를 정의하고 사용해본다.
+4. 두 개의 숫자를 인자로 받아 합과 차를 튜플을 이용해 동시에 반환하는 함수를 정의하고 사용해본다.
+
+5. 위치인자 묶음을 매개변수로 가지며, 위치인자가 몇 개 전달되었는지를 print하고 개수를 리턴해주는 함수를 정의하고 사용해본다.
+6. 람다함수와 리스트 컴프리헨션을 사용해 한 줄로 구구단의 결과를 갖는 리스트를 생성해본다.
+
+
+
+<br><br><br><br><br><br>
+
+
+
+1번
+
+```bash
+        def need_furit_color_argument(color):
+    if color=='red':
+        result='apple'
+    elif color == 'yellow':
+        result='banana'
+    elif color == 'green':
+        result = 'melon'
+    else:
+        result ='i dont know'
+    return result
+
+print(need_furit_color_argument('red'))
+```
+
+1번 개선 .dict.get() 사용해서 default값 설정 가능
+```bash
+fruit_dict={'red':'apple', 'yellow':'banana','green':'melon'}
+def what_fruit2(color):
+return fruit_dict.get("color","I don't know")
+```
+
+
+<br>
+
+
+2번
+
+```bash
+def need_furit_color_argument(color):
+    'you should give among red, yellow, grenn'
+    if color=='red':
+        result='apple'
+    elif color == 'yellow':
+        result='banana'
+    elif color == 'green':
+        result = 'melon'
+    else:
+        result ='i dont know'
+    return result
+
+print(need_furit_color_argument('red'))
+```
+
+<br>
+
+3번
+
+```bash
+def get_num(*args):
+    if(len(args)==1):
+        result = args[0]**2
+    elif(len(args)==2):
+        result = args[0]*args[1]
+    else
+    return result
+```
+
+
+<br>
+
+4번
+```bash
+def plus_minus(num1,num2):
+    return (num1+num2),(num1-num2)
+```
+
+<br>
+
+5번
+```bash
+def get_position_argu(*args):
+    print(len(args))
+    return(len(args))
+```
+
+<br>
+
+6번
+```bash
+f=lambda x,y:x*y
+
+a=[ "{}x{}={}".format(x,y,f(x,y)) for x in range(1,10)for y in range(1,10)]
+
+```
