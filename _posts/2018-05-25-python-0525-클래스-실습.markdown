@@ -12,7 +12,8 @@ ex) 사람 클래스와 고양이 클래스 -> 사람이 '먹이준다' 메서�
 2. 외부에서 조작하면 문제가 생길 수 있는 속성을 private하게 지정되도록 이름을 바꾸고, property를 만들어 본다. setter가 필요없는 속성은 읽기전용으로 남겨두며, 변경해야 하는 속성은 setter를 구현하고 제한조건을 만든다
 ex) 음식을 먹고 포만감을 늘리는 메서드 -> 포만감이 100이상이면 먹지 않도록
 
-
+(setter가 없으면 읽기전용이다.  
+동적으로 작동한다는 것은 서로 관련 전혀 없는 함수들 가지고 있는데 사용할 수 있는것.)
 
 
 
@@ -84,11 +85,11 @@ class Scope:
 
 class Gun:
     def __init__(self,name):
-        self.name=name
+        self.__name=name
         self.__amo=10#30bullet per every magzine
-        self.maximum_range=1#1km
-        self.hit_ratio=100#per every 100 bullet
-        self.rpm=100 #rate of fire per min
+        self.__maximum_range=1#1km
+        self.__hit_ratio=100#per every 100 bullet
+        self.__rpm=100 #rate of fire per min
 
     def reload(self,magazine):
         magazine.reloading(self)
@@ -104,15 +105,15 @@ class Gun:
 
     def equip(self,item):
         item.use(self)
-        print(f'ratio changed !  now  maximum_range : {self.maximum_range} km')
+        print(f'ratio changed !  now  maximum_range : {self.__maximum_range} km')
 
     def __repr__(self):
-        return (f'{self.name} (amo:{self.__amo} ,maximum_range: {self.maximum_range} km'
-                f',hit_ratio: {self.hit_ratio} per 100 bullert, rpm: {self.rpm} per min)'
+        return (f'{self.__name} (amo:{self.__amo} ,maximum_range: {self.__maximum_range} km'
+                f',hit_ratio: {self.__hit_ratio} per 100 bullert, rpm: {self.__rpm} per min)'
 
     )
 
-
+    #총알,사거리,명중률, 연사율 은 읽고 쓰고 다 하도록.    
     @property
     def amo(self):
         return self.__amo
@@ -120,6 +121,37 @@ class Gun:
     @amo.setter
     def amo(self,new_amo):
         self.__amo= new_amo
+
+    @property
+    def maximum_range(self):
+        return self.__maximum_range
+
+    @maximum_range.setter
+    def maximum_range(self,new_maximum_range):
+        self.__maximum_range= new_maximum_range
+
+    @property
+    def hit_ratio(self):
+        return self.__hit_ratio
+
+    @hit_ratio.setter
+    def hit_ratio(self,new_hit_ratio):
+        self.__hit_ratio= new_hit_ratio
+
+    @property
+    def rpm(self):
+        return self.__rpm
+
+    @rpm.setter
+    def rpm(self,new_rpm):
+        self.__rpm= new_rpm
+
+
+    #이름은 읽기만 가능하도록 getter만 가지고 있다.
+    @property
+    def name(self):
+        return self.__name
+
 
 
 
@@ -135,6 +167,10 @@ class Scope:
         gun.maximum_range+=1
         gun.hit_ratio+=5
         gun.rpm-=5
+
+
+
+
 
 
 ```
