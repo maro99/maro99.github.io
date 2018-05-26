@@ -76,7 +76,7 @@ date: "2018-05-26 14:27"
 
 1단계
 
-```bash
+```python
 
 class Library:
 
