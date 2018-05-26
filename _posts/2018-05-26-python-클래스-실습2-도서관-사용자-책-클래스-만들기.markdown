@@ -6,7 +6,7 @@ date: "2018-05-26 14:27"
 
 주어진 대략적인 형태.
 
-```python
+```bash
 도서 관리 프로그램
     Library, Book, User클래스 구현
         프로그램 시작시 도서 5권 정도를 가진 상태로 시작
@@ -39,3 +39,564 @@ date: "2018-05-26 14:27"
 ```
 
 <br>
+<br>
+
+```bash
+#북이라는 것이 하나의 객체인데 객채화가 안되있는 상황에서 라이브러리객체의 책꽃이에 꽃쳐있는것이 말이되나?
+
+
+#동작방법 설정
+
+#########책을 꽃는 과정########
+
+
+
+#처음에 라이브러리 클래스를 인스턴스화 시키고
+#책 5권을 차래로 인스턴스화 시킨다,--->도서명을 입력하면책이객채화된다.(책의 초기 위치는 bookshop)
+
+#객체화한 책을 added 함수를 통해 직접 라이브러리에 넣어준다.
+#location은 library가 되고, 도서관의 booklist에 업데이트 된다.
+
+
+
+
+#1단계로는 빈 리스트로 시작해서 5권 초기에 인스턴스화 후직접 도서관에 에딩해주는식으로 해보고
+
+#1.5단계-->도서관<-->유저관의 연관관계 만들기.
+
+#2단계로는 library 클래스 내부에  인잇 시에  초기에 넣어놓은 책 목록대로 앞글자
+#소문자를 대문자화 해서 Book클래스의 객체를 5개 만드는 동작 넣어보자.
+
+```
+
+<br>
+<br>
+<br>
+
+
+1단계
+
+```bash
+
+class Library:
+
+    def __init__(self,name):
+        self.name=name
+        self.__book_list=[]#'science','math','history','art','poet'
+
+    def add_book(self,a_book):# 여기서 직접 에드해주는 것이 아니라 받은a_book의 adding함수가 있을거라 예측하고 그걸 쓴다.
+        #self.__book_list.append(a_book)이런식으로 nono
+
+        a_book.added(self)#library 클래스 객체를 반드시 넘겨줘야한다.
+        print(f'{a_book.name}이 도서관에 반납됬습니다.')
+
+    def remove_book(self,a_book):
+        a_book.removed(self)
+        print(f'{a_book.name}이 대출 됬습니다.')
+
+    def __repr__(self):
+        return f'{self.name}에 현재 있는 책들 {self.book_list}'
+
+    @property
+    def book_list(self):
+        return self.__book_list
+
+    #setter 를 안쓰는 데도 그냥 library.book_list.append()해도 책이 추가된다.remove()도 적용된다.???
+    #당연한 것이겠지만 Library 클래스 내부 메소드에서는 self.__booklist.append(), self.booklist.append() 둘다 된다.
+
+
+class Book:
+
+    def __init__(self,name):
+        self.name=name
+        self.__location="bookshop" #bookshop 에 책이 처음으로 소환됨.
+
+
+    def added(self,library_or_user):#library클래스에서 add_book 할때 준 self= 여기서의 library이다.
+        self.__location='library'
+        library_or_user.book_list.append(self.name)
+
+    def removed(self,library_or_user):
+        self.__location='user'
+        library_or_user.book_list.remove(self.name)
+
+    @property#이걸 유저에서 연계해서 사용하면 좋겠다.
+    def is_borrowed(self):
+        return self.__location
+
+
+
+
+class User:
+
+    def __init__(self,name):
+        self.name=name
+        self.__book_list=[]
+
+    def borrow_book(self,a_book):
+        a_book.added(self)
+        print(f'{a_book.name}을 도서관에서 빌렸습니다..')
+
+    def return_book(self,a_book):
+        a_book.removed(self)
+        print(f'{a_book.name}을 도서관에 반납 했습니다..')  
+
+    def __repr__(self):
+        return f'{self.name}이 현재 빌린 책들 {self.book_list}'
+
+    @property
+    def book_list(self):
+        return self.__book_list
+
+
+```
+
+실행--->
+
+
+```bash
+dongdamun_library=Library('동대문도서관')
+dongdamun_library.book_list
+```
+out-->  
+[]
+```bash
+dongdamun_library
+```
+out-->  
+'동대문도서관에 현재 있는 책들 []'
+
+```bash
+#Book 객체 생성
+math=Book('math')
+science=Book('sceince')
+
+```
+
+```bash
+math.is_borrowed
+```
+out-->  
+'bookshop'
+
+
+```bash
+#도서관 책꽃이에 책 꽃아줌.
+dongdamun_library.add_book(math)
+```
+out-->  
+math이 도서관에 반납됬습니다.
+
+```bash
+dongdamun_library
+```
+out-->  
+동대문도서관에 현재 있는 책들 ['math']
+
+```bash
+math.is_borrowed
+```
+out-->  
+'library'
+
+```bash
+#여기서 문제는 책->유저 책->도서관의 연결고리는 있지만   도서관<--->책의 연결고리 가 없다는것.
+#즉 유저가 책을 빌려도 도서관책 리스트 안의 책이 사라지지 않는다는것.
+#--------->서로 반대로 리무브 에드 소환하면 될까? 동시에 ?
+```
+
+```bash
+maro=User('마로')
+maro.borrow_book(math)
+```
+out-->  
+math을 도서관에서 빌렸습니다..
+
+```bash
+maro
+```
+out-->  
+마로이 현재 빌린 책들 ['math']  
+
+```bash
+dongdamun_library  #내가 책을 빌렸는데도 아직 책이 있다.
+```
+out-->  
+동대문도서관에 현재 있는 책들 ['math']
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+```bash
+
+#1.5단계-->도서관<-->유저관의 연관관계 만들기.
+
+class Library:
+
+    def __init__(self,name):
+        self.name=name
+        self.__book_list=[]#'science','math','history','art','poet'
+
+    def add_book(self,a_book):# 여기서 직접 에드해주는 것이 아니라 받은a_book의 adding함수가 있을거라 예측하고 그걸 쓴다.
+        #self.__book_list.append(a_book)이런식으로 nono
+
+        a_book.added(self)#library 클래스 객체를 반드시 넘겨줘야한다.
+        print(f'{a_book.name}이 {self.name}에 반납됬습니다.')
+
+    def remove_book(self,a_book):
+        a_book.removed(self)
+        print(f'{a_book.name}이 대출 됬습니다.')
+
+    def __repr__(self):
+        return f'{self.name}에 현재 있는 책들 {self.book_list}'
+
+    @property
+    def book_list(self):
+        return self.__book_list
+
+    #setter 를 안쓰는 데도 그냥 library.book_list.append()해도 책이 추가된다.remove()도 적용된다.???
+    #당연한 것이겠지만 Library 클래스 내부 메소드에서는 self.__booklist.append(), self.booklist.append() 둘다 된다.
+
+
+class Book:
+
+    def __init__(self,name):
+        self.name=name
+        self.__location="bookshop" #bookshop 에 책이 처음으로 소환됨.
+
+
+    def added(self,library_or_user):#library클래스에서 add_book 할때 준 self= 여기서의 library이다.
+        self.__location=library_or_user.name
+        library_or_user.book_list.append(self.name)
+        print(f'이제{self.name}은 {library_or_user.name}의 소유이다.')
+
+    def removed(self,library_or_user):
+        library_or_user.book_list.remove(self.name)
+        print(f'이제{self.name}은 {library_or_user.name}로 부터 멀어졌다.')
+
+    @property#이걸 유저에서 연계해서 사용하면 좋겠다.
+    def is_borrowed(self):
+        return self.__location
+
+
+
+
+class User:
+
+    def __init__(self,name):
+        self.name=name
+        self.__book_list=[]
+
+    def borrow_book(self,library,a_book):
+        if a_book.name in library.book_list:
+            a_book.added(self)
+            a_book.removed(library)
+            print(f'{self.name}가 {a_book.name}을 {library.name}에서 빌렸습니다..')
+            print(f'{self.name}의 현재 대출목록...{self.book_list} ')
+            print(f'{library.name}의 책꽃이에는 현재...{library.book_list} ')
+        else:
+            print(f'{a_book.name} 는 {library.name}에 없습니다.')
+    def return_book(self,library,a_book):
+        a_book.removed(self)
+        a_book.added(library)
+        print(f'{self.name}가 {a_book.name}을 {library.name}에 반납 했습니다..')
+        print(f'{self.name}의 현재 대출목록...{self.book_list} ')
+        print(f'{library.name}의 책꽃이에는 현재...{library.book_list} ')
+
+    def __repr__(self):
+        return f'{self.name}가 현재 빌린 책들 {self.book_list}'
+
+    @property
+    def book_list(self):
+        return self.__book_list
+```
+
+실행
+```bash
+#일단 도서관 객채를 만들고 책 객채를 5개 만든 후 그안에 책을 5권 넣어줌.
+dapsibli_library=Library("답십리도서관")
+math = Book('math')
+sicience= Book('sicience')
+moral= Book('moral')
+art= Book('art')
+finance= Book('finance')
+
+
+dapsibli_library.add_book(math)
+dapsibli_library.add_book(sicience)
+dapsibli_library.add_book(moral)
+dapsibli_library.add_book(art)
+dapsibli_library.add_book(finance)
+```
+out-->  
+이제math은 답십리도서관의 소유이다.  
+math이 답십리도서관에 반납됬습니다.  
+이제sicience은 답십리도서관의 소유이다.  
+sicience이 답십리도서관에 반납됬습니다.  
+이제moral은 답십리도서관의 소유이다.  
+moral이 답십리도서관에 반납됬습니다.  
+이제art은 답십리도서관의 소유이다.  
+art이 답십리도서관에 반납됬습니다.  
+이제finance은 답십리도서관의 소유이다.  
+finance이 답십리도서관에 반납됬습니다.  
+
+
+```bash
+dapsibli_library
+```
+out-->  
+답십리도서관에 현재 있는 책들 ['math', 'sicience', 'moral', 'art', 'finance']
+
+```bash
+#유저 객체를 만들어서 책을 빌려봄.
+maro=User('마로')
+maro.borrow_book(dapsibli_library,math)
+```
+out-->  
+이제math은 마로의 소유이다.  
+이제math은 답십리도서관로 부터 멀어졌다.  
+마로가 math을 답십리도서관에서 빌렸습니다..  
+마로의 현재 대출목록...['math']     
+답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance']  
+
+
+```bash
+#반납해봄.
+maro.return_book(dapsibli_library,math)
+```
+out-->  
+이제math은 마로로 부터 멀어졌다.  
+이제math은 답십리도서관의 소유이다.  
+마로가 math을 답십리도서관에 반납 했습니다..  
+마로의 현재 대출목록...[]   
+답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance', 'math']   
+
+```bash
+#도서관이 소유한 책 이 없을때 빌리려 하면?
+maro.borrow_book(dapsibli_library,math)
+maro.borrow_book(dapsibli_library,math)
+```
+out-->  
+이제math은 마로의 소유이다.  
+이제math은 답십리도서관로 부터 멀어졌다.  
+마로가 math을 답십리도서관에서 빌렸습니다..  
+마로의 현재 대출목록...['math']   
+답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance']   
+math 는 답십리도서관에 없습니다.  
+
+```bash
+math.is_borrowed
+```
+out-->  
+'마로'
+
+```bash
+moral.is_borrowed
+```
+out-->  
+'답십리도서관'
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+2단계
+```bash
+#2단계로는 library 클래스 내부에  인잇 시에  초기에 넣어놓은 책 목록대로 앞글자
+#소문자를 대문자화 해서 Book클래스의 객체를 5개 만드는 동작 넣어보자.
+#질문? 자식 클래스를 내부에서 다른 클래스를 정의하고싶어서 사용하는 경우도 있나?
+#혹은 아직 만들어지지도 않은 클래스를 새롭게 만드는 클래스의 init에서 만들 수 있을까?---->exec()함수로 스트링을 명령문처럼 만들어서 실행함.
+
+
+
+
+class Library:
+
+    def __init__(self,name):
+        self.name=name
+        self.__book_list=['math','sicience','moral','art','finance']
+
+        for i in self.__book_list:
+            s="{}=Book('{}')".format(i,i)
+            exec(s ,globals())#여기서 glabals설정을 안해주면 안된다. 이렇게 해도 되는지 모르겠다.
+
+
+
+    def add_book(self,a_book):# 여기서 직접 에드해주는 것이 아니라 받은a_book의 adding함수가 있을거라 예측하고 그걸 쓴다.
+        #self.__book_list.append(a_book)이런식으로 nono
+
+        a_book.added(self)#library 클래스 객체를 반드시 넘겨줘야한다.
+        print(f'{a_book.name}이 {self.name}에 반납됬습니다.')
+
+    def remove_book(self,a_book):
+        a_book.removed(self)
+        print(f'{a_book.name}이 대출 됬습니다.')
+
+    def __repr__(self):
+        return f'{self.name}에 현재 있는 책들 {self.book_list}'
+
+
+    @property
+    def book_list(self):
+        return self.__book_list
+
+    #setter 를 안쓰는 데도 그냥 library.book_list.append()해도 책이 추가된다.remove()도 적용된다.???리스트여서 그런건가?
+    #당연한 것이겠지만 Library 클래스 내부 메소드에서는 self.__booklist.append(), self.booklist.append() 둘다 된다.
+
+
+class Book:
+
+    def __init__(self,name):
+        self.name=name
+        self.__location="library"
+
+
+    def added(self,library_or_user):#library클래스에서 add_book 할때 준 self= 여기서의 library이다.
+        self.__location=library_or_user.name
+        library_or_user.book_list.append(self.name)
+        print(f'이제{self.name}은 {library_or_user.name}의 소유이다.')
+
+    def removed(self,library_or_user):
+        library_or_user.book_list.remove(self.name)
+        print(f'이제{self.name}은 {library_or_user.name}로 부터 멀어졌다.')
+
+    @property#이걸 유저에서 연계해서 사용하면 좋겠다.
+    def is_borrowed(self):
+        return self.__location
+
+
+class User:
+
+    def __init__(self,name):
+        self.name=name
+        self.__book_list=[]
+
+    def borrow_book(self,library,a_book):
+        if a_book.name in library.book_list:
+            a_book.added(self)
+            a_book.removed(library)
+            print(f'{self.name}가 {a_book.name}을 {library.name}에서 빌렸습니다..')
+            print(f'{self.name}의 현재 대출목록...{self.book_list} ')
+            print(f'{library.name}의 책꽃이에는 현재...{library.book_list} ')
+        else:
+            print(f'{a_book.name} 는 {library.name}에 없습니다.')
+    def return_book(self,library,a_book):
+        a_book.removed(self)
+        a_book.added(library)
+        print(f'{self.name}가 {a_book.name}을 {library.name}에 반납 했습니다..')
+        print(f'{self.name}의 현재 대출목록...{self.book_list} ')
+        print(f'{library.name}의 책꽃이에는 현재...{library.book_list} ')
+
+    def __repr__(self):
+        return f'{self.name}가 현재 빌린 책들 {self.book_list}'
+
+    @property
+    def book_list(self):
+        return self.__book_list
+
+
+#############추가하고 싶은것들
+    #몇권까지 빌릴 수 있는지 리미트를 걸어보는 것도 좋을 것 같다.
+    #책이 모두다 remove되면 책이 없다이렇게.
+    #추후에 반납되는 곳이 어느 도서관 인지, 어떤 유저인지도 넣어주자.
+    #후에 책으 로그? 책이 언제 입고됬고 누가 빌렸는지 책의 위치는 어디인지도 업데이트 하면 좋겠다.
+```
+
+
+실행
+
+```bash
+#library 객체 생성----> library_init()에 있는 책목록이름따서 Book객채들도 만들어준다.
+dapsibli_library=Library("답십리도서관")
+dapsibli_library#도서관의 초기 책 목록 확인.
+```
+out-->  
+답십리도서관에 현재 있는 책들 ['math', 'sicience', 'moral', 'art', 'finance']
+
+```bash
+#Library 클래스의 book_list대로 Book 객체 5개 만들어 졌는지 확인
+math
+sicience
+moral
+art
+finance
+
+```
+out-->   
+<__main__.Book at 0x7f9abd3fe518>
+
+```bash
+#책의 lcation 확인
+math.is_borrowed
+sicience.is_borrowed
+moral.is_borrowed
+art.is_borrowed
+finance.is_borrowed
+
+```
+out-->  
+'library'
+
+```bash
+#유저를 생성해서 책을 빌려본다.
+maro=User('maro')
+maro.borrow_book(dapsibli_library,math)
+```
+out-->  
+이제math은 maro의 소유이다.  
+이제math은 답십리도서관로 부터 멀어졌다.  
+maro가 math을 답십리도서관에서 빌렸습니다..  
+maro의 현재 대출목록...['math']   
+답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance']   
+
+```bash
+#책의 위치 확인
+math.is_borrowed
+```
+out-->  
+'maro'
+
+```bash
+#유저가 책을 빌린 상태에서 같은책을 또 빌리려 해본다.
+maro.borrow_book(dapsibli_library,math)
+```
+out-->  
+math 는 답십리도서관에 없습니다.
+
+```bash
+#유저의 책을 반납해몬다.
+maro.return_book(dapsibli_library,math)
+
+```
+out-->
+이제math은 maro로 부터 멀어졌다.  
+이제math은 답십리도서관의 소유이다.  
+maro가 math을 답십리도서관에 반납 했습니다..  
+maro의 현재 대출목록...[]   
+답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance', 'math']    
+
+```bash
+#책의 위치 확인
+math.is_borrowed
+```
+out-->  
+'답십리도서관'
