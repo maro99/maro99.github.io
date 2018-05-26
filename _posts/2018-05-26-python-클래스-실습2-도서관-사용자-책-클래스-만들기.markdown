@@ -154,71 +154,71 @@ class User:
 실행--->
 
 
-```bash
+```python
 dongdamun_library=Library('동대문도서관')
 dongdamun_library.book_list
 ```
 out-->  
 []
-```bash
+```python
 dongdamun_library
 ```
 out-->  
 '동대문도서관에 현재 있는 책들 []'
 
-```bash
+```python
 #Book 객체 생성
 math=Book('math')
 science=Book('sceince')
 
 ```
 
-```bash
+```python
 math.is_borrowed
 ```
 out-->  
 'bookshop'
 
 
-```bash
+```python
 #도서관 책꽃이에 책 꽃아줌.
 dongdamun_library.add_book(math)
 ```
 out-->  
 math이 도서관에 반납됬습니다.
 
-```bash
+```python
 dongdamun_library
 ```
 out-->  
 동대문도서관에 현재 있는 책들 ['math']
 
-```bash
+```python
 math.is_borrowed
 ```
 out-->  
 'library'
 
-```bash
+```python
 #여기서 문제는 책->유저 책->도서관의 연결고리는 있지만   도서관<--->책의 연결고리 가 없다는것.
 #즉 유저가 책을 빌려도 도서관책 리스트 안의 책이 사라지지 않는다는것.
 #--------->서로 반대로 리무브 에드 소환하면 될까? 동시에 ?
 ```
 
-```bash
+```python
 maro=User('마로')
 maro.borrow_book(math)
 ```
 out-->  
 math을 도서관에서 빌렸습니다..
 
-```bash
+```python
 maro
 ```
 out-->  
 마로이 현재 빌린 책들 ['math']  
 
-```bash
+```python
 dongdamun_library  #내가 책을 빌렸는데도 아직 책이 있다.
 ```
 out-->  
@@ -241,7 +241,7 @@ out-->
 
 
 
-```bash
+```python
 
 #1.5단계-->도서관<-->유저관의 연관관계 만들기.
 
@@ -326,7 +326,7 @@ class User:
 ```
 
 실행
-```bash
+```python
 #일단 도서관 객채를 만들고 책 객채를 5개 만든 후 그안에 책을 5권 넣어줌.
 dapsibli_library=Library("답십리도서관")
 math = Book('math')
@@ -355,13 +355,13 @@ art이 답십리도서관에 반납됬습니다.
 finance이 답십리도서관에 반납됬습니다.  
 
 
-```bash
+```python
 dapsibli_library
 ```
 out-->  
 답십리도서관에 현재 있는 책들 ['math', 'sicience', 'moral', 'art', 'finance']
 
-```bash
+```python
 #유저 객체를 만들어서 책을 빌려봄.
 maro=User('마로')
 maro.borrow_book(dapsibli_library,math)
@@ -374,7 +374,7 @@ out-->
 답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance']  
 
 
-```bash
+```python
 #반납해봄.
 maro.return_book(dapsibli_library,math)
 ```
@@ -385,7 +385,7 @@ out-->
 마로의 현재 대출목록...[]   
 답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance', 'math']   
 
-```bash
+```python
 #도서관이 소유한 책 이 없을때 빌리려 하면?
 maro.borrow_book(dapsibli_library,math)
 maro.borrow_book(dapsibli_library,math)
@@ -398,13 +398,13 @@ out-->
 답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance']   
 math 는 답십리도서관에 없습니다.  
 
-```bash
+```python
 math.is_borrowed
 ```
 out-->  
 '마로'
 
-```bash
+```python
 moral.is_borrowed
 ```
 out-->  
@@ -420,7 +420,7 @@ out-->
 <br>
 
 2단계
-```bash
+```python
 #2단계로는 library 클래스 내부에  인잇 시에  초기에 넣어놓은 책 목록대로 앞글자
 #소문자를 대문자화 해서 Book클래스의 객체를 5개 만드는 동작 넣어보자.
 #질문? 자식 클래스를 내부에서 다른 클래스를 정의하고싶어서 사용하는 경우도 있나?
@@ -524,7 +524,7 @@ class User:
 
 실행
 
-```bash
+```python
 #library 객체 생성----> library_init()에 있는 책목록이름따서 Book객채들도 만들어준다.
 dapsibli_library=Library("답십리도서관")
 dapsibli_library#도서관의 초기 책 목록 확인.
@@ -532,7 +532,7 @@ dapsibli_library#도서관의 초기 책 목록 확인.
 out-->  
 답십리도서관에 현재 있는 책들 ['math', 'sicience', 'moral', 'art', 'finance']
 
-```bash
+```python
 #Library 클래스의 book_list대로 Book 객체 5개 만들어 졌는지 확인
 math
 sicience
@@ -544,7 +544,7 @@ finance
 out-->   
 <__main__.Book at 0x7f9abd3fe518>
 
-```bash
+```python
 #책의 lcation 확인
 math.is_borrowed
 sicience.is_borrowed
@@ -556,7 +556,7 @@ finance.is_borrowed
 out-->  
 'library'
 
-```bash
+```python
 #유저를 생성해서 책을 빌려본다.
 maro=User('maro')
 maro.borrow_book(dapsibli_library,math)
@@ -568,21 +568,21 @@ maro가 math을 답십리도서관에서 빌렸습니다..
 maro의 현재 대출목록...['math']   
 답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance']   
 
-```bash
+```python
 #책의 위치 확인
 math.is_borrowed
 ```
 out-->  
 'maro'
 
-```bash
+```python
 #유저가 책을 빌린 상태에서 같은책을 또 빌리려 해본다.
 maro.borrow_book(dapsibli_library,math)
 ```
 out-->  
 math 는 답십리도서관에 없습니다.
 
-```bash
+```python
 #유저의 책을 반납해몬다.
 maro.return_book(dapsibli_library,math)
 
@@ -594,7 +594,7 @@ maro가 math을 답십리도서관에 반납 했습니다..
 maro의 현재 대출목록...[]   
 답십리도서관의 책꽃이에는 현재...['sicience', 'moral', 'art', 'finance', 'math']    
 
-```bash
+```python
 #책의 위치 확인
 math.is_borrowed
 ```
