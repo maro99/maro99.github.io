@@ -1,0 +1,591 @@
+---
+layout: "post"
+title: "Python 정규표현식"
+date: "2018-05-26 16:51"
+---
+
+
+##### 정규표현식 (Regular Expressions)
+>특정한 패턴에 일치하는 복잡한 문자열을 처리할 때 사용하는 기법
+크롤러 만들때 유리하다. 대부분의 언어에 내장되어있다.
+파이썬에서는 re 모듈을 임포트 해서 사용.
+
+<br><br>
+
+* **match**  
+  시작부터 일치하는 패턴 찾기.(중간에 있는것은 못찾음.)
+
+
+```python
+import re
+source ='Lux, the lady of Luminosity'
+m=re.match('Lux',source)
+if m:
+    print(m.group())
+```
+--->  
+Lux
+
+match()는 시작부분부터 일치하는 패턴만 찾기 때문에, Lady라는 패턴으로는 찾을 수 없다.
+
+print(m) 해보면--->
+
+<_sre.SRE_Match object; span=(0, 3), match='Lux'>
+__repr__메소드가 표현해줌.  0이상 3미만~에서 찾았다.
+
+
+Lux~lady 까지 출력을 위해 lady 패턴만을 사용하고싶다면
+```python
+import re
+source ='Lux, the lady of Luminosity'
+m=re.match('.*lady',source)
+if m:
+    print(m.group())
+```
+--->  
+Lux, the Lady  
+
+.은 문자 1개의미, *은 해당 패턴 0회이상 올수 있다는뜻.  
+즉 .*Lady 는 앞에 아무 문자열(또는 빈) 이후 Lady로 끝나는 패턴을 의미한다
+<br>
+<br>
+<br>
+<br>
+
+* **search**  
+첫 번째 일치하는 패턴 찾기 (처움부터가 아니라.)
+ex) re.search('Lady', source)
+
+
+* **findall**  
+일치하는 모든 패턴 찾기  
+ex) re.findall('\s(L.*?)\s.',source)
+
+
+
+* **finditer**  
+여러번 패턴을 찾아야 할때 쓴다.
+(indall 같은 경우에는 반환이 튜플로 나오기도 해서.. 쓰기 힘들 수 도 있다. 파인드 이터는 리스트에 쓰기좋음.
+타입 조회 해보면
+callable_iterator 라 나온다.
+)  
+ex) my_list=re.finditer('y.?',source)
+
+* **split**  
+패턴으로 나누기  
+문자열의 split()메서드와 비슷하지만 패턴을 사용할 수 있다.
+ex) m = re.split('o', source)
+
+
+* **sub **  
+패턴 대체하기
+문자열의 replace()메서드와 비슷하지만 패턴을 사용할 수 있다  
+ex) m = re.sub('o', '!', source)
+
+<br><br>
+
+#### 정규표현식의 패턴 문자
+
+패턴|문자
+---|---
+\\d|숫자
+\\D|비숫자(숫자가 아닌 모든 것)
+\\w|문자
+\\W|비문자
+\\s|공백 문자
+\\S|비공백 문자
+\\b|단어 경계 (\w와 \W의 경계)
+\\B|비단어 경계(단어경계의 반대.)
+
+\b 단어경계--->  
+경계` 위치를 가리킨다. (b = boundary 를 의미한다)  
+이 문장에서  /\bo.\b/ 를 매치시킨 결과는 다음과 같다.  
+  |Raindrops| |on| |roses|, |and| |whiskers| |on| |kittens|.  
+( r'\bfoo\b' matches 'foo', 'foo.', '(foo)', 'bar foo baz' but not 'foobar' or 'foo3'.)  
+r 를 앞에써줘야 파이썬의 백스페이스 기호와 구분된다.  
+<br>
+
+위의 표가 햇갈리면 각각을 다음 코드에 넣어보면 패턴 문자들이 어떤 것들을 커버하는지 알 수 있다.
+```python
+import string
+printable = string.printable  //프린트 할 수 있는거 일단 다 담아보자.
+re.findall('\w', printable)
+re.findall('\d', printable)
+```
+
+<br>
+<br>
+
+#### 정규표현식의 패턴 지정자 (Pattern specifier)  
+여기서 expr은 정규표현식이다.  
+
+
+패턴|의미
+---|---
+abc|리터럴 `abc`
+(expr)|expr
+expr1 \ expr2 (수직선)| expr1 또는 expr2
+`.` | `\n`을 제외한 모든 문자
+`^` | 소스문자열의 시작
+`$` | 소스문자열의 끝
+expr`?` | 0 또는 1회의 expr
+expr`*` | 0회 이상의 최대 expr
+expr`*?`| 0회 이상의 최소 expr
+expr`+` | 1회 이상의 최대 expr
+expr`+?`| 1회 이상의 최소 expr
+expr`{m}`| m회의 expr
+expr`{m,n}`| m에서 n회의 최대 expr
+expr`{m,n}?` | m에서 n회의 최소 expr
+[abc] | a or b or c
+[^abc] | not (a or b or c)
+expr1(?=expr2) | 뒤에 expr2가 오면 expr1에 해당하는 부분
+expr1(?!expr2) | 뒤에 expr2가 오지 않으면 expr1에 해당하는 부분
+(?<=expr1)expr2 | 앞에 expr1이 오면 expr2에 해당하는 부분
+(?<!expr1)expr2 | 앞에 expr1이 오지 않으면 expr2에 해당하는 부분
+
+
+<br>
+
+#### 실습
+
+다음문 story 변수에 담아서 각각을 실행해보자.  
+```bash
+Born to the prestigious Crownguards, the paragon family of Demacian service, Luxanna was destined for greatness. She grew up as the family's only daughter, and she immediately took to the advanced education and lavish parties required of families as high profile as the Crownguards. As Lux matured, it became clear that she was extraordinarily gifted. She could play tricks that made people believe they had seen things that did not actually exist. She could also hide in plain sight. Somehow, she was able to reverse engineer arcane magical spells after seeing them cast only once. She was hailed as a prodigy, drawing the affections of the Demacian government, military, and citizens alike.
+
+As one of the youngest women to be tested by the College of Magic, she was discovered to possess a unique command over the powers of light. The young Lux viewed this as a great gift, something for her to embrace and use in the name of good. Realizing her unique skills, the Demacian military recruited and trained her in covert operations. She quickly became renowned for her daring achievements; the most dangerous of which found her deep in the chambers of the Noxian High Command. She extracted valuable inside information about the Noxus-Ionian conflict, earning her great favor with Demacians and Ionians alike. However, reconnaissance and surveillance was not for her. A light of her people, Lux's true calling was the League of Legends, where she could follow in her brother's footsteps and unleash her gifts as an inspiration for all of Demacia.
+```
+
+* re.findall('Lux', story)  
+* re.findall('Lux|her|she', story)    //여러개
+* re.findall('[Ll]ux|[Hh]er|[Ss]he', story) //소문자 까지 찾고 싶다.
+* re.findall('^Born', story) //문자열 시작부터.
+* re.findall('Demacia\.$', story) // 마침표는 특수문자라서 슬래쉬 해야함.
+* re.findall('was', story)
+* re.findall('(?<=she) was', story)
+* re.findall('\w+(?<!she) was', story)
+* re.findall('\bwas\b', story)
+* re.findall(r'\bwas\b', story)
+
+
+######  뒤에 was 붙은 단어까지 빼보자.
+```python
+re.findall('\w*?\swas', story)
+```
+--->  
+['Luxanna was',  
+ 'she was',  
+ 'she was',  
+ 'She was',  
+ 'she was',  
+ 'surveillance was',  
+ 'calling was']  
+
+ ```python
+re.findall('\w+ was', story)      
+#이렇게 하면 0개이상 아니라 1개이상이라 더 적절.
+```
+
+
+###### story='asdsadsdwas asdasd was'   이라면
+앞의 was는어떻게 포함 할 것인가?
+```python
+re.findall('\w+\s*was',story2)#또는
+m = re.findall(r'\w+\s\bwas\b',story2)
+```
+
+
+###### 앞에 공백이 많다면?
+```bash
+ "Lux   was asdsadsdwas asdasd was"
+```
+
+
+```python
+re.findall(r'\w+\s+  \bwas\b', story)  
+```
+######  'Lux, was asdsadsdwas asdasd was' 이경우도 포함하고 싶다.  
+```python
+re.findall(r'\w+\W* \s+  \bwas\b', story2)  
+```
+
+
+######  ''Lux, was Lux,was asdsadsdwas asdasd was'
+```python
+re.findall(r'\w+\W*\s*\bwas\b', story2) #또는  
+
+#print(re.findall('\W',printable)) 으로 확인해보면 --->비문자에 해보면 공백도 포함되니 더 간단하게.
+re.findall(r'\w+\W*was\b',story2)  
+```
+
+
+###### 단어경계로 왼쪽오른족 단어도 구분해준다.
+
+```python
+#단어하나 was 하나, 가운데는 단어가 아닌 어떤 문자가 와도 신경쓰지 않겠다.
+re.findall(r'\b\w+\b\W*\bwas\b',story2)
+
+```
+--->  
+['Lux?, was', 'Lux,was', 'asdsadsdwas', 'iamf!was', 'asdasd was']
+
+###### findall로 하면 위처럼 여러기호?!등 다섞여서 중구난방이라서꺼내기가 힘들다.
+---->찾는 부분에만 그룹을 지어준다.
+
+```python  
+m = re.findall(r'(\w+)\W*(was)\b',story2)
+print(m)
+```
+---->  
+[('Lux', 'was'),  
+ ('Lux', 'was'),  
+ ('asdsadsd', 'was'),  
+ ('iamf', 'was'),  
+ ('asdasd', 'was')]
+
+**finditter 가 더 좋다.**
+---->  
+```python  
+m_list= re.finditer(r'(\w+)\W*(was)\b',story2)
+
+
+for m in m_list:
+    print('{} {}'.format(
+        m.group(1),
+        m.group(2)
+    )
+         )
+
+```
+--->  
+Lux was  
+Lux was  
+asdsadsd was  
+iamf was  
+asdasd was  
+
+
+**she 들어간 거만 빼고싶다면?**  
+단어하나 이후 단어가 오기 전에 검사를 한다.
+앞에 있는 단어가 쉬가 아니여야 뒤로 간다.~~~
+
+```python
+re.findall(r'\b\w+\b(?<![Ss]he)\W*\bwas\b',story)
+```  
+
+**그룹이 많아져서 그룹들을 구분하고 싶다면?**  
+(?p<before>\w) 이런식으로 이름 지은후 1,2 번호 대신 group(before) 이런식으로 사용가능
+```python
+m_list= re.finditer(r'\b(?P<before>\w+)\b(?<![Ss]he)\W*\bwas\b',story)
+```
+
+
+<br>
+<br>
+
+##### 최소일치와 최대일치
+= re.match(r'<.*>', html)
+로 검색하면, .*표현식이 첫 번째 >에서 멈추는것이 아니라 맨 마지막 >까지 검색을 진행한다.  
+*이나 +에 최소일치인 ?를 붙여주면, 표현식 다음부분에 해당하는 문자열이 처음 나왔을 때 그 부분까지만 일치시키고 검색을 마친다.
+
+예제)  
+
+```python
+html = '<html><body><h1>HTML</h1></body></html>'
+```
+최대패턴지정자  
+```Python
+re.findall(r'<.*>',html)
+```
+---->결과  
+```bash
+['<html><body><h1>HTML</h1></body></html>']  
+```
+
+
+최소패턴지정자  
+```Python
+re.findall(r'<.*?>',story3)
+```
+--->결과   
+```bash
+['<html>', '<body>', '<h1>', '</h1>', '</body>', '</html>']
+```
+
+
+
+<br><br>
+
+##### 실습
+아래 실습들은 위의 story변수 문자열을 소스로 사용한다.  
+
+1. {m}패턴지정자를 사용해서 a로 시작하는 4글자 단어를 전부 찾는다.
+
+2. r로 끝나는 모든 단어를 찾는다.
+
+3. a,b,c,d,e중 아무 문자나 3번 연속으로 들어간 단어를 찾는다.  
+ex) b[eca]me
+
+4. re.sub를 사용해서 ,로 구분된 앞/뒤 단어에 대해 앞단어는 대문자화 시키고, 뒷단어는 대괄호로 감싼다. 이 과정에서, 각각의 앞/뒤에 before, after그룹 이름을 사용한다.
+
+<br>
+<br>
+
+1번
+```python
+re.findall(r'\ba\w{3}\b',story)
+```
+--->결과  
+```bash
+re.findall(r'\ba\w{3}\b',story)
+```
+<br>
+<br>
+<br>
+
+
+2번
+```python
+re.findall(r'\b\w*r\b',story)
+```
+--->결과  
+```bash
+['for',
+ 'daughter',
+ 'clear',
+ 'engineer',
+ 'after',
+ 'over',
+ 'for',
+ 'her',
+ 'her',
+ 'her',
+ 'for',
+ 'her',
+ 'her',
+ 'her',
+ 'favor',
+ 'However',
+ 'for',
+ 'her',
+ 'her',
+ 'her',
+ 'brother',
+ 'her',
+ 'for']
+```
+
+3번
+```python
+re.findall(r'\b\w*[abcde][abcde][abcde]\w*\b',story)
+```
+--->결과  
+```bash
+['advanced', 'became', 'made', 'embrace', 'became', 'deep']
+```
+<br>
+<br>
+<br>
+
+
+4번
+
+findall로 일단 패턴을 만들자.
+```python
+re.findall(r'\ba\w{3}\b',story)
+```
+--->결과  
+```bash
+
+['Crownguards, the',
+ 'service, Luxanna',
+ 'daughter, and',
+ 'matured, it',
+ 'Somehow, she',
+ 'prodigy, drawing',
+ 'government, military',
+ 'Magic, she',
+ 'gift, something',
+ 'skills, the',
+ 'conflict, earning',
+ 'However, reconnaissance',
+ 'people, Lux',
+ 'Legends, where']
+```
+<br>
+
+투플에 각각을 그룹화 해서 넣어줌. 우리가 찾는 단어드을 그룹화했다.
+```python
+re.findall(r'(\w+)\s*,\s*(\w+)',story)
+```
+--->결과  
+```bash
+
+[('Crownguards', 'the'),
+ ('service', 'Luxanna'),
+ ('daughter', 'and'),
+ ('matured', 'it'),
+ ('Somehow', 'she'),
+ ('prodigy', 'drawing'),
+ ('government', 'military'),
+ ('Magic', 'she'),
+ ('gift', 'something'),
+ ('skills', 'the'),
+ ('conflict', 'earning'),
+ ('However', 'reconnaissance'),
+ ('people', 'Lux'),
+ ('Legends', 'where')]
+
+```
+<br>
+
+
+다음의 공식문서에서 찾아봤다.
+https://docs.python.org/3/library/re.html
+
+```bash
+sub(pattern, repl, string, count=0, flags=0)
+Return the string obtained by replacing the leftmost non-overlapping occurrences of p
+attern in string by the replacement repl. If the pattern isn’t found, string is returned
+unchanged. repl can be a string or a function; if it is a string, any backslash escapes in
+it are processed. That is, \n is converted to a single newline character, \r is converted
+to a carriage return, and so forth. Unknown escapes such as \& are left alone. Backreferenc
+es, such as \6, are replaced with the substring matched by group 6 in the pattern. For ex
+ample:
+
+치환 repl에 의해 string의 pattern의 가장 겹치지 않는 부분을 치환 해 취득한 캐릭터 라인을 돌려줍
+니다. 패턴을 찾을 수없는 경우 문자열은 변경되지 않고 반환됩니다. repl은 문자열이나 함수가 될 수 있습니다
+. 문자열이면 역 슬래시 이스케이프가 처리됩니다. 즉, \ n은 단일 개행 문자로 변환되고 \ r은 캐리지 리턴으로
+변환됩니다. \ &와 같은 알 수없는 이스
+케이프는 그대로 두었습니다. \ 6과 같은 역 참조는 패턴에서 그룹 6과 일치하는 하위 문자열로 대체됩니다. 예 :
+
+
+(패턴을 우리가 지정하는데로 패턴에 지정된 문자열을 주어진 스트링에서 리플 형태로 바꿔주고 변형된 스틀이을 다시 리턴해준다.
+만약 패턴을 못찾으면~안바뀜)
+
+>>>
+>>> re.sub(r'def\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(\s*\):', #파이썬의 함수이름 짓는거 나타낸것.
+...         r'static PyObject*\npy_\1(void)\n{', #저네를 이렇게 바꿔주겠다. 여기는 괄호걍 들어가도됨 #1이 ([a-zA-Z_][a-zA-Z_0-9]*)나타냄
+... 'def myfunc():')
+'static PyObject*\npy_myfunc(void)\n{' #씨나 자바 형태로 바뀐것.
+If repl is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single match object argument, and returns the replacement string. For example:
+
+>>>
+>>> def dashrepl(matchobj):
+...         if matchobj.group(0) == '-': return ' '
+...         else: return '-'
+>>> re.sub('-{1,2}', dashrepl, 'pro----gram-files')
+'pro--gram files'
+>>> re.sub(r'\sAND\s', ' & ', 'Baked Beans And Spam', flags=re.IGNORECASE)
+'Baked Beans & Spam'
+
+```
+
+일딴 연습삼아 예이삐시로 바꿔주었다.
+```python
+re.sub(r'(\w+)\s*,\s*(\w+)','ABC',story)
+```
+--->결과  
+```bash
+"\nBorn to the prestigious ABC paragon family of Demacian ABC was destined for greatness. She grew up as the family's only ABC she immediately took to the advanced education and lavish parties required of families as high profile as the Crownguards. As Lux ABC became clear that she was extraordinarily gifted. She could play tricks that made people believe they had seen things that did not actually exist. She could also hide in plain sight. ABC was able to reverse engineer arcane magical spells after seeing them cast only once. She was hailed as a ABC the affections of the Demacian ABC, and citizens alike.\n\nAs one of the youngest women to be tested by the College of ABC was discovered to possess a unique command over the powers of light. The young Lux viewed this as a great ABC for her to embrace and use in the name of good. Realizing her unique ABC Demacian military recruited and trained her in covert operations. She quickly became renowned for her daring achievements; the most dangerous of which found her deep in the chambers of the Noxian High Command. She extracted valuable inside information about the Noxus-Ionian ABC her great favor with Demacians and Ionians alike. ABC and surveillance was not for her. A light of her ABC's true calling was the League of ABC she could follow in her brother's footsteps and unleash her gifts as an inspiration for all of Demacia.\n"
+```
+<br>
+
+우리 목적대로 일단 두번째 문자 괄호 부분만 다시 수정해줬다.
+```python
+re.sub(r'(\w+)\s*,\s*(\w+)',r'\1,(\2)',story) #여기서 쩜 어퍼하면 바로 안된다
+```
+--->결과  
+```bash
+"\nBorn to the prestigious Crownguards,(the) paragon family of Demacian service,(Luxanna) was destined for greatness. She grew up as the family's only daughter,(and) she immediately took to the advanced education and lavish parties required of families as high profile as the Crownguards. As Lux matured,(it) became clear that she was extraordinarily gifted. She could play tricks that made people believe they had seen things that did not actually exist. She could also hide in plain sight. Somehow,(she) was able to reverse engineer arcane magical spells after seeing them cast only once. She was hailed as a prodigy,(drawing) the affections of the Demacian government,(military), and citizens alike.\n\nAs one of the youngest women to be tested by the College of Magic,(she) was discovered to possess a unique command over the powers of light. The young Lux viewed this as a great gift,(something) for her to embrace and use in the name of good. Realizing her unique skills,(the) Demacian military recruited and trained her in covert operations. She quickly became renowned for her daring achievements; the most dangerous of which found her deep in the chambers of the Noxian High Command. She extracted valuable inside information about the Noxus-Ionian conflict,(earning) her great favor with Demacians and Ionians alike. However,(reconnaissance) and surveillance was not for her. A light of her people,(Lux)'s true calling was the League of Legends,(where) she could follow in her brother's footsteps and unleash her gifts as an inspiration for all of Demacia.\n"
+```
+<br>
+
+
+
+
+
+정보를 공식문서에서 몇가지 다시 봤다.
+```bash
+
+#패턴이 아니라 함수로 아예 만들어서 그렇게 조작해준다.
+
+If repl is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single match object argument, and returns the replacement string. For example:
+
+>>>
+>>> def dashrepl(matchobj):
+...     if matchobj.group(0) == '-': return ' '
+...         else: return '-'
+>>> re.sub('-{1,2}', dashrepl, 'pro----gram-files')
+'pro--gram files'
+>>> re.sub(r'\sAND\s', ' & ', 'Baked Beans And Spam', flags=re.IGNORECASE)
+'Baked Beans & Spam'
+```
+
+
+
+
+
+
+re.sub(r'(\w+)\s*,\s*(\w+)',r'\1,(\2)',story)이거랑 같은 작용하는 함수 만들어보자.
+```python
+
+def repl_function(m):
+    return m.group(1).upper()+m.group(2)+'('+m.group(3)+')'
+
+
+re.sub(r'(\w+)(\s*,\s*)(\w+)',repl_function,story)
+
+```
+--->결과  
+```bash
+" Born to the prestigious CROWNGUARDS, (the) paragon family of Demacian SERVICE,
+(Luxanna) was destined for greatness. She grew up as the family's only DAUGHTER,
+ (and) she immediately took to the advanced education and lavish parties required
+ of families as high profile as the Crownguards. As Lux MATURED, (it) became clear
+ that she was extraordinarily gifted. She could play tricks that made people believe
+ they had seen things that did not actually exist. She could also hide in plain sigh
+t. SOMEHOW, (she) was able to reverse engineer arcane magical spells after seeing
+them cast only once. She was hailed as a PRODIGY, (drawing) the affections of the
+Demacian GOVERNMENT, (military), and citizens alike.\n\nAs one of the youngest
+women to be tested by the College of MAGIC, (she) was discovered to possess a
+unique command over the powers of light. The young Lux viewed this as a great
+GIFT, (something) for her to embrace and use in the name of good. Realizing her
+ unique SKILLS, (the) Demacian military recruited and trained her in covert
+operations. She quickly became renowned for her daring achievements; the most
+ dangerous of which found her deep in the chambers of the Noxian High Command.
+She extracted valuable inside information about the Noxus-Ionian CONFLICT,
+(earning) her great favor with Demacians and Ionians alike.
+HOWEVER, (reconnaissance) and surveillance was not for her.
+A light of her PEOPLE, (Lux)'s true calling was the League of
+LEGENDS, (where) she could follow in her brother's footsteps and
+unleash her gifts as an inspiration for all of Demacia."
+
+
+```
+<br>
+
+강사님이 하신것,
+```python
+def repl_function(m):
+    before=m.group(1).upper()
+    after=f'[{m.group(3)}]'
+    return "{}, {}".format(before,after)
+
+re.sub(r'(\w+)(\s*,\s*)(\w+)',repl_function,story)
+```
+
+<br>
+
+두번째 단어 섞기도 한번 해봄.
+```python
+import random
+
+def repl_function(m):
+    mixed=list(m.group(3))
+    random.shuffle(mixed)
+    return m.group(1).upper()+m.group(2)+'('+"".join(mixed)+')'
+
+
+re.sub(r'(\w+)(\s*,\s*)(\w+)',repl_function,story)
+
+```
