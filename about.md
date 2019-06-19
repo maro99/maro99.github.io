@@ -5,9 +5,9 @@ sidebar_link: true
 ---
 
 <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
+  A **bunker** is a defensive military fortification designed to protect people or valued materials from falling bombs or other attacks. Bunkers are mostly underground, compared to blockhouses which are mostly above ground. They were used extensively in World War I, World War II, and the Cold War for weapons facilities, command and control centers, and storage facilities (for example, in the event of nuclear war). Bunkers can also be used as protection from tornadoes.
 </p>
 
 To make pages show up in the sidebar, add `sidebar_link: true` to the front
 matter.
+
