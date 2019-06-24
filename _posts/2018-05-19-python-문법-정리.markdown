@@ -1,6 +1,21 @@
 ---
 layout: "post"
 title: "Python 문법 정리"
+categories:
+ - Python
+tags:
+ - Python
+ - 연산자 
+ - 형변환 
+ - list
+ - tuple
+ - set
+ - mutable
+ - sequence
+ - print
+ - input 
+ - listcomprehension   
+ - 파이썬 문법 
 date: "2018-05-19 18:50"
 ---
 
