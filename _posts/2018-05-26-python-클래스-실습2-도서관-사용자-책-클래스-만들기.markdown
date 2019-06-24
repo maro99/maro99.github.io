@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "Python 클래스 실습2 도서관 사용자 책 클래스 만들기"
+categories:
+ - Python
+tags:
+ - Python
+ - class 
 date: "2018-05-26 14:27"
 ---
 

@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "python 매개변수(parameter)와 인자(argument)의 차이"
+categories:
+ - Python
+tags:
+ - Python
+ - argument vs parameter 
 date: "2018-05-22 15:50"
 ---
 

@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "Python 상속 (Inheritance)"
+categories:
+ - Python
+tags:
+ - Python
+ - 상속
 date: "2018-05-24 20:01"
 ---
 

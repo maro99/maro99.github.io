@@ -1,6 +1,12 @@
 ---
 layout: "post"
 title: "Python 정규표현식"
+categories:
+ - Python
+tags:
+ - Python
+ - 정규표현식   
+ - regular expressions 
 date: "2018-05-26 16:51"
 ---
 

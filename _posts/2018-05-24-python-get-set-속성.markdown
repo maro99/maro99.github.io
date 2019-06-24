@@ -1,6 +1,13 @@
 ---
 layout: "post"
 title: "Python get/set 속성"
+categories:
+ - Python
+tags:
+ - Python
+ - private     
+ - getter   
+ - setter 
 date: "2018-05-24 19:22"
 ---
 

@@ -2,6 +2,12 @@
 layout: "post"
 title: "위치 인자(Positional arguments) 와 키워드 인자(Keyword arguments)의 차이
 "
+categories:
+ - Python
+tags:
+ - Python
+ - 위치 인자     
+ - 키워드 인자 
 date: "2018-05-22 15:54"
 ---
 

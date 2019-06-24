@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "python 속성 접근 지정자 (attribute acccess modifier)"
+categories:
+ - Python
+tags:
+ - Python
+ - 속성접근지정자
 date: "2018-05-24 19:09"
 ---
 

@@ -1,6 +1,12 @@
 ---
 layout: "post"
 title: "내부함수의 클로져(Closure)"
+categories:
+ - Python
+tags:
+ - Python  
+ - closure  
+ - 파이썬 문법
 date: "2018-05-22 16:45"
 ---
 

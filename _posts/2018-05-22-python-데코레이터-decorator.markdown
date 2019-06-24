@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "Python 데코레이터(Decorator)"
+categories:
+ - Python
+tags:
+ - Python
+ - decorator
 date: "2018-05-22 16:52"
 ---
 

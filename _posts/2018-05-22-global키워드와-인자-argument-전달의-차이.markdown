@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "global키워드와 인자(argument)전달의 차이"
+categories:
+ - Python
+tags:
+ - Python
+ - global
 date: "2018-05-22 16:38"
 ---
 

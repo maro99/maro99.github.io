@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "Python 함수 실습."
+categories:
+ - Python
+tags:
+ - Python
+ - function 
 date: "2018-05-23 10:42"
 ---
 

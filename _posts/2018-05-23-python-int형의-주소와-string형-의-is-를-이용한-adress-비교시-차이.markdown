@@ -1,6 +1,10 @@
 ---
 layout: "post"
 title: "Python int형의 주소와 string형 의 is 를 이용한 adress 비교시 차이"
+categories:
+ - Python
+tags:
+ - Python
 date: "2018-05-23 12:37"
 ---
 

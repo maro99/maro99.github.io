@@ -1,6 +1,14 @@
 ---
 layout: "post"
 title: "Python 함수 알고리즘, 순차검색(Sequential Search), 선택정렬(Selection sort)"
+categories:
+ - Algorithm
+tags:
+ - Python
+ - Alogorithm   
+ - selection sort   
+ - sequential sort    
+ - sort 
 date: "2018-05-23 12:07"
 ---
 

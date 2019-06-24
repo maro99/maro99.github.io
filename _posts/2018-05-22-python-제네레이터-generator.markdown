@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "python 제네레이터 (generator) "
+categories:
+ - Python
+tags:
+ - Python
+ - generator
 date: "2018-05-22 17:16"
 ---
 

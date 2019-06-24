@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "python 작은 정수의 메모리할당"
+categories:
+ - Python
+tags:
+ - Python
+ - memory allocation
 date: "2018-05-22 16:28"
 ---
 

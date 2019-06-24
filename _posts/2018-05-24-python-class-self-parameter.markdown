@@ -1,6 +1,12 @@
 ---
 layout: "post"
 title: "Python class self parameter"
+categories:
+ - Python
+tags:
+ - Python
+ - class
+ - self 
 date: "2018-05-24 18:43"
 ---
 

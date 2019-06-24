@@ -1,6 +1,11 @@
 ---
 layout: "post"
 title: "Python 0525 클래스 실습"
+categories:
+ - Python
+tags:
+ - Python
+ - class
 date: "2018-05-25 00:17"
 ---
 
