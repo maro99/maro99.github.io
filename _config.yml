@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            mr.Na 의 개발 블로그     
+title:            mr.Na의 개발로그     
 tagline:          '^-^'
 description:      ' '
 
