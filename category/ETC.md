@@ -2,7 +2,4 @@
 layout: category
 title: ETC
 ---
-
-~                                                                                                                                    
-~                                                                                                                                    
-~                                                       
+                                                                                                                                                                                            

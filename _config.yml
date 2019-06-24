@@ -3,9 +3,9 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            The Bunker
-tagline:          'A Jekyll theme'
-description:      'of programming and computer science'
+title:            mr.Na 의 개발 블로그     
+tagline:          '^-^'
+description:      ' '
 
 baseurl:          # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
