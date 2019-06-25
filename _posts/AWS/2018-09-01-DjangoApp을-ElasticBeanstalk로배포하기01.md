@@ -468,7 +468,7 @@ location /media/ {
 alias /srv/project/.media/;
 }
 }
-``
+```
 
 **superviosr.conf**  
 ```
@@ -507,7 +507,7 @@ logto = /var/log/uwsgi.log
 local.py복사해온다.--> 에전에 한대로 dev, local 을 넣어준다.  
    
 **wsgi 패키지화** 하고  dev, local 을 넣어준다.  
-```  
+
 
  
 **Dockerfile.dev**    
@@ -579,3 +579,4 @@ production관련된 파일들도 도 만들자.
 `./build.py -m production`           
 `docker run --rm -it -p 9994:80 eb-docker:production`  해본다.       
 welcome 아니라 notfound 404 뜨는게 맞다.        
+
