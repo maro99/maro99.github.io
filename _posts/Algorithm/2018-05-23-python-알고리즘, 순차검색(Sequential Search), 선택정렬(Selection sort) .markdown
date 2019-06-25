@@ -92,7 +92,7 @@ n개의 수에 대해서 상수 배수 로 증가하면 n차
 
 
 
-![빅오 그래프](images/BIGO_GRAPH.jpg)
+![빅오 그래프](../images/BIGO_GRAPH.jpg)
 
 
 
