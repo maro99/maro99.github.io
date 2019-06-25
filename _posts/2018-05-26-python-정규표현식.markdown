@@ -7,6 +7,7 @@ tags:
  - Python
  - 정규표현식   
  - regular expressions 
+comments : true
 date: "2018-05-26 16:51"
 ---
 
