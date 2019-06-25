@@ -1,3 +1,20 @@
+---
+layout: "post"
+title: "DjangoApp을 ElasticBeanstalk로 배포하기01 "
+categories:  
+- AWS  
+tags:  
+- Python    
+- Docker      
+- ElasticBeanstalk    
+- deploy    
+- nginx     
+- uwsgi     
+comments : true    
+date: "2018-09-01 18:50"  
+---
+
+
 ## 1. 프로젝트 초기 설정      
 
 먼저 다음과 같이 디렉토리구성 및 기본 파일을 추가했다.   
