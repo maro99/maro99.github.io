@@ -32,6 +32,9 @@ projects/
 
 ```     
 
+---  
+
+
 
 ## 2. CustomUsermodel만들기     
 
@@ -65,6 +68,9 @@ admin.site.register(User, UserAdmin)
 ```
 AUTH_USER_MODEL = 'members.User'
 ```
+
+---  
+
 
 ## 3.Dockerfile작성      
 
@@ -105,6 +111,11 @@ root@19a7f536f0a0:/srv/project/app# pip install django
 ```
 
 http://localhost:9994 들어가보면 로켓 나온다.        
+
+
+---  
+
+
 
 
 ## 4. EB 시작, build.py작성       
@@ -292,6 +303,8 @@ CMD python manage.py runserver 0:8000
 `docker run --rm -it -p 9994:8000 eb-docker:local`     
 
 
+---  
+
 
 ## 5.Dockerfil.dev작성해 dev mode로 docker실행하도록함      
 
@@ -466,10 +479,13 @@ command=uwsgi --ini /srv/project/.config/dev/uwsgi.ini #앞에 가상환경 pip�
 command=nginx
 
 ```
- 
+   
+
+
 **uwsgi.ini**  
-home = 가상환경 경로 필요없다.  
-```  
+  
+
+```     
 [uwsgi]
 ;파이썬 프로젝트로 change directory
 chdir = srv/project/app
@@ -491,11 +507,11 @@ logto = /var/log/uwsgi.log
 local.py복사해온다.--> 에전에 한대로 dev, local 을 넣어준다.  
    
 **wsgi 패키지화** 하고  dev, local 을 넣어준다.  
- 
+```  
 
  
-**Dockerfile.dev**  
-```
+**Dockerfile.dev**    
+```    
 FROM eb-docker:base
 MAINTAINER nadcdc4@gmail.com
 
@@ -546,6 +562,8 @@ CMD supervisord
 `docker run --rm -it -p 9994:80 eb-docker:dev` 해본다.  
 
 
+---   
+
 ## 6.production용 Dockerfile, settings, wsgi, .config작성  
 
 production관련된 파일들도 도 만들자.     
@@ -558,6 +576,6 @@ production관련된 파일들도 도 만들자.
  
 **build.py**에  -->production 관련된것 전부 추가.   
    
-./build.py -m production         
-docker run --rm -it -p 9994:80 eb-docker:production해본다.     
-welcome 아니라 notfound 404 뜨는게 맞다.      
+`./build.py -m production`           
+`docker run --rm -it -p 9994:80 eb-docker:production`  해본다.       
+welcome 아니라 notfound 404 뜨는게 맞다.        
