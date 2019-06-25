@@ -7,7 +7,8 @@ categories:
 tags:
  - Python
  - 위치 인자     
- - 키워드 인자 
+ - 키워드 인자  
+comments : true
 date: "2018-05-22 15:54"
 ---
 

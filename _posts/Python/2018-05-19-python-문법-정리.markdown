@@ -16,6 +16,7 @@ tags:
  - input 
  - listcomprehension   
  - 파이썬 문법 
+comments : true
 date: "2018-05-19 18:50"
 ---
 

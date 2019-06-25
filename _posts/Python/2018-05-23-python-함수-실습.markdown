@@ -6,6 +6,7 @@ categories:
 tags:
  - Python
  - function 
+comments : true
 date: "2018-05-23 10:42"
 ---
 

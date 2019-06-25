@@ -6,6 +6,7 @@ categories:
 tags:
  - Python
  - decorator
+comments : true
 date: "2018-05-22 16:52"
 ---
 

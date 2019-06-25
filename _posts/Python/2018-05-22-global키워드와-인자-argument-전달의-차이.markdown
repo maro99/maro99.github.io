@@ -6,6 +6,7 @@ categories:
 tags:
  - Python
  - global
+comments : true
 date: "2018-05-22 16:38"
 ---
 

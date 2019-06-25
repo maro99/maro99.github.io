@@ -6,6 +6,7 @@ categories:
 tags:
  - Python
  - generator
+comments : true
 date: "2018-05-22 17:16"
 ---
 

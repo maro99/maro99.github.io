@@ -6,7 +6,8 @@ categories:
 tags:
  - Python
  - class
- - self 
+ - self   
+comments : true   
 date: "2018-05-24 18:43"
 ---
 

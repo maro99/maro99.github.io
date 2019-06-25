@@ -6,6 +6,7 @@ categories:
 tags:
  - Python
  - 속성접근지정자
+comments : true  
 date: "2018-05-24 19:09"
 ---
 

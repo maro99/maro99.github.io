@@ -6,6 +6,7 @@ categories:
 tags:
  - Python
  - argument vs parameter 
+comments : true
 date: "2018-05-22 15:50"
 ---
 

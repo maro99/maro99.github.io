@@ -5,7 +5,8 @@ categories:
  - Python
 tags:
  - Python
- - 상속
+ - 상속  
+comments : true
 date: "2018-05-24 20:01"
 ---
 

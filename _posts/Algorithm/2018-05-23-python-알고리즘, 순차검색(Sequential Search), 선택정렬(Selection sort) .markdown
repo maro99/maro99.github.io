@@ -8,7 +8,8 @@ tags:
  - Alogorithm   
  - selection sort   
  - sequential sort    
- - sort 
+ - sort  
+comments : true  
 date: "2018-05-23 12:07"
 ---
 

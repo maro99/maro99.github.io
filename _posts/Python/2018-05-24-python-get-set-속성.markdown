@@ -7,7 +7,8 @@ tags:
  - Python
  - private     
  - getter   
- - setter 
+ - setter   
+comments : true  
 date: "2018-05-24 19:22"
 ---
 

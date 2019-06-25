@@ -5,6 +5,7 @@ categories:
  - Python
 tags:
  - Python
+comments : true
 date: "2018-05-23 12:37"
 ---
 

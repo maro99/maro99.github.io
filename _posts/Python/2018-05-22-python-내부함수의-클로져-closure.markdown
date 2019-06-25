@@ -7,6 +7,7 @@ tags:
  - Python  
  - closure  
  - 파이썬 문법
+comments : true
 date: "2018-05-22 16:45"
 ---
 
