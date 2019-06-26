@@ -11,7 +11,7 @@ tags:
 - route53
 - ebextensions   
 comments : true    
-date: "2018-09-09 18:50"  
+date: "2018-09-17 18:50"  
 ---      
 
 ## 1.Route53으로 Domain 붙여보자.   

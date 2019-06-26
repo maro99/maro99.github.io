@@ -13,7 +13,7 @@ tags:
 - platform hook   
 - ebextensions   
 comments : true    
-date: "2018-09-09 18:50"  
+date: "2018-09-13 18:50"  
 ---        
 
 ## 1. EB와 Loadbalancer구조와 ec2 leader    
