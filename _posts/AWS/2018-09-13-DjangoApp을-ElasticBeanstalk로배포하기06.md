@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "DjangoApp을 ElasticBeanstalk로 배포하기05"
+title: "DjangoApp을 ElasticBeanstalk로 배포하기06"
 categories:  
 - AWS  
 tags:  
