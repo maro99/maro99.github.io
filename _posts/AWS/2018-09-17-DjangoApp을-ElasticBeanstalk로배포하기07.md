@@ -36,7 +36,7 @@ Type:
 Domain Name에 자신이 가진 도메인 네임 그대로 적는다.내경우 nssmr.com
 나머지 두개는 안적고 create누른다.    
 
-![1](https://imgur.com/bGvGjet)   
+![1](https://i.imgur.com/bGvGjet.png)        
 
 
 type ns에 value 4개 있는데    
@@ -46,7 +46,7 @@ nssmr.com 체크
 도메인 관리 --->네임서버주소 변경   
 신청하기 누른다.   
 
-![2](https://imgur.com/wNshXJq)     
+![2](https://imgur.com/wNshXJq.png)     
 
 
 
@@ -82,11 +82,11 @@ EB
 create hosted zone은 우리가 쓸 도메인 자체에 대한 설정.   
 create Record Set 은 도메인으로 온 요청이 어디로 갈지에 대한 설정.     
 
-![3](https://imgur.com/BcNh0jF)  
+![3](https://imgur.com/BcNh0jF.png)      
 
 name에 아무것도 안붙이면 그냥 그 도메인 자체에 접근할때에 대한설정이다.  
 **type**은 IPv4
-**alias**는  아마존에서 제공하는 서비스에 도메인 붙일건지에 대한 설정. -->yes
+**alias**는  아마존에서 제공하는 서비스에 도메인 붙일건지에 대한 설정. -> yes
 **alias target*** 누르면    
     elb application loadbalancer와   
     elb enverionment 두개 뜬다.   
@@ -95,7 +95,7 @@ name에 아무것도 안붙이면 그냥 그 도메인 자체에 접근할때에
 **loadbalacner**에 하는것이 나중에 https설정으로 인증서 붙일때 쉽다.   
 
 create하면 왼쪽에 이렇게 A type의 새로운 칸이 생겼다.  
-![4](https://imgur.com/E7aXLHO)  
+![4](https://imgur.com/E7aXLHO.png)  
 
 
 type들이 여러개 있는데    
@@ -173,7 +173,7 @@ server_name localhost; -> server_name *.elasticbeanstalk.com www.nssmr.com nssmr
 aws ec2 console의 로드벨런서  가본다. 
 eb에서 만든  로드벨런서 한개가 존재하는 상태 
 아래 리스너 있다.       
-![5](https://imgur.com/6Z0RZ4F)        
+![5](https://imgur.com/6Z0RZ4F.png)        
 
 
 로드벨런서가    
@@ -199,7 +199,7 @@ awseb -AWSEB-1%%6~~~이거하나 뜨는데 선택한다.
 뒤로 가보면 추가 HTTPS : 443 추가 됬는데 문제는    
 HTTP: 443 옆에 경고 표시가 있다.     
 443 포트로 받아서 eb로 넘기는건 같게 표시되어있다.     
-![6](https://imgur.com/7Gxhbjs)   
+![6](https://imgur.com/7Gxhbjs.png)   
 
 아까 eb생성할때 security그룹이 두개 생겼는데   
 하나는 eb로 만들어진 environment대한것   
