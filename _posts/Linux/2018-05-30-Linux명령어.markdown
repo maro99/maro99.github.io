@@ -1,0 +1,52 @@
+---
+layout: "post"
+title: "git명령어 정리"
+categories:
+- Git   
+
+tags:
+- git     
+comments : true
+date: "2019-08-23 18:50"
+---
+## linux 명령어 
+
+`mkdir` 디렉토리 생성  
+`take` 만들고 해당 디랙토리 안으로이동.  
+`rmdir`  디렉토리삭제   
+`cd `맨 밖으로 나간다.  
+`ls`디렉토리 목록  
+`pwd `디렉토리 경로  
+`echo `텍스트, 경로 출력한다./ 파일 생성및 문자열 추가,   
+`echo ` '텍스트'> 파일 이름  이렇게 하면 파일 생성및 택스트가  
+들어가고 한번 더하면 기존 덮어쓴다. 
+`echo `'텍스트'>>파일이름 하면 기존 내용에 이어서 택스트써진다.  
+`cat `파일 내용보기  
+`touch` 그냥 파일 생성.  
+`rm  -r `  
+`rm  -f`  
+`rm -rf blog` (파일 과 디랙토리 모두 삭제.)  
+`cp test.txt /home `이런식으로 사용한다면 test.txt파일은 그대로  
+있되 /home디렉토리에 또다른 test.txt파일이 복사  
+`cp -r `디렉토리명1 디렉토리명2  
+`ctrl +shift+ n `새로운창  
+`ctrl+a, ctrle +e `라인 앞뒤 왔다갔다 하기.  
+
+`mv test test2`  test 파일을 test2 디렉토리로 이동.  
+`mv /home/nestgoer/ /home/goer/  nestgoer` 디렉토리 자체를 goer  
+디렉토리로 옮김
+`mv test1 testrename1.txt `# 보통 파일 한개의 이름을 바꾸려면  
+mv 명령을 쓴다.  
+`rename [변경전 파일명] [변경후 파일명] [대상파일]`   
+한꺼번에 많은 양의 파일의 이름을 바꾸려면 rename사용한다.  
+
+ex)  
+`$ rename .htm .html *.htm .htm 확장자를 .html로 일괄 수정하기  
+`$ rename. test .testrename?.test`    
+(동일한 파일명 지정, 겹치는 내용 있으면 넘어감.       
+testrename ---->testrename으로 남아있음)    
+
+`$ rename. test .testrename*.test` (testrename---->testrenamerename 확인 해봐라.)
+
+
+

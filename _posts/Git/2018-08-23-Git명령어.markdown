@@ -1,0 +1,122 @@
+---
+layout: "post"
+title: "git명령어 정리"
+categories:
+- Git   
+
+tags:
+- git     
+comments : true
+date: "2019-08-23 18:50"
+---        
+## git 명령어
+`git reset --merge`  머지 취소 
+`git pull --rebase upstream master` 내 저장소를 다른사람들이  
+판다스(업스트림저장소)에 있는것과 최신화 하고 싶다면?
+
+`git init`  저장소 생성  
+  
+`git commit -m ` “{변경 내용}” 인라인 형태의 커밋  
+`git commit`  좀더 길게 커밋 가능 vim 이용  
+`git commit -a -m`      
+ Tracked 상태의 파일을 자동으로 Staging Area에 넣는다.  
+
+`git add` {파일명}  특정파일 스테이징.
+`git add *` 변경된 모든파일 커밋.
+`git add --al`
+
+`git status` 변경사항 체크
+`git diff` 어떤 라인을 추가했고 삭제했는지가 궁금할 때 사용  
+         모디파이드 상테에선 -f옵션 추가후 삭제가능.수정했지만  
+         아직 staged 상태가 아닌 파일을 비교해 볼 수 있다.)  
+         
+`git diff --staged` (커밋하려고 Staging Area에 넣은 파일의  
+변경 부분을 보고 싶으면 커밋한 것과 Staging Area에  
+                있는 것을 비교)  
+                
+`$ git log` // 모든 커밋로그 확인        
+`$ git log -p` //각 커밋의 diff 결과를 보여준다 $ git log -3  
+// 최근 3개 커밋로그 확인  
+`$ git log  --stat` // 각 커밋의 통계 정보를 조회 $ git log   --oneline // 각 커밋을 한 줄로 표시  
+`git rm` 명령을 실행하면 삭제한 파일은 Staged    상태(그냥삭제하면 unstaged)-->커밋하면 파일삭제, 추적중단.)  
+$ git mv file_from file_to 이름변경.(add 후 써야함)  
+  
+`git log --oneline --all`  
+`git log --oneline --all --graph`   
+`$ git reset HEAD^` :  최종 커밋 취소. 그러나 변경된 파일은   남아있다. 뺀거 다시 포함해서 다시커밋 하는것.  즉 다음이 커밋   
+하나로 기록됨)  
+`$ git commit -m 'initial commit'  `
+`$ git add forgotten_file`
+`$ git commit --amend ` :최종 커밋 취소. 그러나 변경된 파일은  
+남아있다.// 마지막 커밋메세지 수정(ref)(실수로 커밋안한것을  
+staging area에 add 후 커밋어멘드 하면 
+  
+`git reset HEAD<file>` staged 상태를 Unstaged 상태로 변경.  
+(add 취소)
+`git checkout --<file>` 파일을 수정하고 다시 되돌리는 방법은  
+
+
+ 
+#### tag 관련
+`git tag` //이미 만들어진 태그 있는지 확인.  
+`git tag -a v1.4 -m "my version 1.4"` //테그만든사람,   날짜,메시지 저장(-m추가해서) annoted태그  
+`git tag -a v.12 9fceb02` // 특정 커밋에 태그 위해 명령의 끝에  
+커밋 체크섬 명시.  
+`git shiw` //태그,커밋정보 모두 확인  
+`git tag v1.4 -lw` //파일에 커밋 체크섬 저장.lightweight 태그 
+`git push origin[태그이름]`// 서버에 별도로 태그 전송. 일반  
+push로는 전송 안됨.
+ 
+#### 리모트저장소 관련
+
+`git remote` // 원격 저장소 관리명령어. 
+`git remote -v` //주어 단축 이름과 url을 함께 볼 수 있다.
+
+`git remote add origin https://github.com/[이름]/gitExample`로  
+origin이라는 이름으로 원격 저장소 주소를 등록 (이제  
+origin이라는 이름 사용해서 만든 저장소에 접속 가능)  
+
+
+`git remote remove origin`  //origin이라는 원격 저장소를  
+지우고 싶다면 
+`git push` 원격저장소에 commit을 저장. (예 git push origin  
+master 올긴은 원격저장소 이름, 마스터는 현재 사용하는 컴퓨터의  
+브랜치 이름. 이후 깃허브 계정으로 로그인라인뜸)  
+`git pull` 다른사람이 pr혹은 깃헙통해 commit해을때 그내용을  
+클라이언트로 받는 명령어.현재 작업코드와 merge까지함.  
+(ex git pull origin master   origin의 내용이 master로  
+복사된다.)이렇게 하면 원격 저장소의 변경 내용이 로컬 작업  
+디렉토리에 받아지고(fetch), 병합(merge)된답니다.  
+`git clone ` 클라이언트 상에 아무것도 없을 때 서버의 프로젝트를 내려받는 명령어. git clone [저장소 주소] 를 하면됨 저장소의 내용을 다운로드받고 자동으로 init도 된다.\
+`git clone https://github.com/schacon/ticgit//` orgin이라는 (리모트)저장소가 자동으로 등록된다.
+(git clone https://github.com/maro99/Git-Remote-branch.git   remote-branch   
+이런식으로 쓰면 해당 저장소가 remote-branch라는 폴더 이름으로
+생김. 위의 origin자동과 다른점은? 이건 폴더명을 단순히  
+정해준거지 등록된 리모트 저장소는 origin과 같음. )  
+`git remote` //  현재 프로젝트에 등록된 리모트 저장소를  
+확인(위와 같이쓰면 orgin보임.)
+`git fetch` [remote-name] 로컬엔 없지만 리모트 저장소에 있는  
+데이터를 모두 가져온다. merge는 안함 수동으로해야함  
+`git remote show [리모트 저장소 이름] ` 리모트 저장소의  
+구체적인 정보를 확인  
+`git merge` // 브랜치 병합 위치에있던 브랜치가 쓰리웨이 머지시  
+앞으로가고 머지 명령에 넣은 브랜치가 뒤에 남아있다.  
+`git remote rename pb paul` 명령으로 리모트 저장소 이름 변경  
+`$ git remote remove paul` 리모트 저장소 삭제.  
+  
+`git remote show` [리모트 저장소 이름] 명령으로 리모트   저장소의 구체적인 정보를 확인할  
+비밀번호를 치기 귀찮다면` git config --global   credential.helper 'store --file 경로'`  
+
+
+
+#### 브랜치관련
+`git branch testing testing`이라는 새로운 브랜치 만든다.  
+`git branch -d feature_x` //브랜치 삭제  
+`git checkout -b feature_x` //브랜치 만들고 갈아타기.  
+
+`git push origin <가지 이름>` //가지를 원격저장소에 업로드  
+`git checkout testing//tesitng `브랜치 로 이동(브랜치 이동하면  
+워킹 디렉토리파일 변경됨.)
+`git log --oneline --decorate --graph --all`  히스토리를 출력  
+
+
