@@ -1,8 +1,8 @@
 ---
 layout: "post"
-title: "git명령어 정리"
+title: "linux 명령어 정리"
 categories:
-- Git   
+- Linux   
 
 tags:
 - git     
