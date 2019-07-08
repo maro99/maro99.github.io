@@ -7,7 +7,7 @@ categories:
 tags:
 - git     
 comments : true
-date: "2019-08-23 18:50"
+date: "2018-08-23 18:50"
 ---
 ## linux 명령어 
 
